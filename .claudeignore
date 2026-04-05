@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.next/
+.vercel/
+*.lock
+*.min.js
+__pycache__/
+.firebase/
+build/
+coverage/
+
+# Token optimizer — load only when explicitly requested
+.claude/completions/**
+.claude/sessions/**
+docs/learnings/**
+docs/archive/**
