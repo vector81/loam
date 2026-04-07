@@ -47,7 +47,7 @@ const BLOB_FRAGMENT = `
     vec2 uv = gl_FragCoord.xy / u_resolution;
     vec2 center = vec2(0.5);
     vec2 mouse = u_mouse / u_resolution;
-    float t = u_time * 0.4;
+    float t = u_time * 0.7;
 
     // Distance from center with morphing
     vec2 toCenter = uv - center;
@@ -59,17 +59,19 @@ const BLOB_FRAGMENT = `
     float angle = atan(toBlobCenter.y, toBlobCenter.x);
     float dist = length(toBlobCenter);
 
-    // Organic morphing radius
+    // Organic morphing radius - more dramatic waves
     float r = 0.28
-      + 0.06 * sin(angle * 3.0 + t * 1.2)
-      + 0.04 * sin(angle * 5.0 - t * 0.8)
-      + 0.03 * cos(angle * 7.0 + t * 1.5)
-      + 0.02 * snoise(vec2(angle * 2.0, t * 0.5))
-      + 0.015 * snoise(vec2(angle * 4.0, t * 0.7));
+      + 0.12 * sin(angle * 3.0 + t * 2.1)
+      + 0.09 * sin(angle * 5.0 - t * 1.6)
+      + 0.08 * cos(angle * 7.0 + t * 2.4)
+      + 0.07 * sin(angle * 2.0 + t * 1.3)
+      + 0.06 * cos(angle * 9.0 - t * 1.9)
+      + 0.04 * snoise(vec2(angle * 2.0, t * 0.8))
+      + 0.03 * snoise(vec2(angle * 4.0, t * 1.2));
 
-    // Mouse proximity inflates blob
+    // Mouse proximity inflates blob - more responsive
     float mouseDist = length(uv - mouse);
-    r += smoothstep(0.4, 0.0, mouseDist) * 0.06;
+    r += smoothstep(0.4, 0.0, mouseDist) * 0.12;
 
     float blob = smoothstep(r + 0.02, r - 0.02, dist);
 
