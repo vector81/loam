@@ -3,6 +3,9 @@ import { Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
+import { WebGLBackground } from "@/components/ui/webgl-background";
+import { ParticleField } from "@/components/ui/particle-field";
 
 const playfair = Playfair_Display({
   variable: "--font-heading",
@@ -18,11 +21,28 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Loam | Marketing, Websites, and Growth Systems",
+  title: {
+    default: "Loam | Marketing, Websites, and Growth Systems",
+    template: "%s | Loam Studio",
+  },
   description:
     "Loam is a strategy-led studio for brands that need sharper positioning, better websites, and growth systems that actually compound.",
   icons: {
     icon: "/favicon.svg",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Loam Studio",
+    title: "Loam | Marketing, Websites, and Growth Systems",
+    description:
+      "Strategy-led studio combining positioning, web creation, and organic growth into one coherent engagement.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Loam | Marketing, Websites, and Growth Systems",
+    description:
+      "Strategy-led studio combining positioning, web creation, and organic growth into one coherent engagement.",
   },
 };
 
@@ -37,12 +57,12 @@ export default function RootLayout({
       className={`${playfair.variable} ${manrope.variable} scroll-smooth antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-earth-50 text-earth-900 font-body">
-        <div className="site-wash site-wash-top" aria-hidden="true" />
-        <div className="site-wash site-wash-mid" aria-hidden="true" />
-        <div className="site-wash site-wash-bottom" aria-hidden="true" />
+        <WebGLBackground />
+        <ParticleField />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ScrollToTop />
         <div className="grain-overlay" aria-hidden="true" />
       </body>
     </html>

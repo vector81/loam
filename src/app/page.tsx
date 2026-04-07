@@ -19,12 +19,19 @@ import { AnimatedSection } from "@/components/ui/animated-section";
 import { Counter } from "@/components/ui/counter";
 import { CursorGlow } from "@/components/ui/cursor-glow";
 import { MagneticButton } from "@/components/ui/magnetic-button";
+import { Marquee } from "@/components/ui/marquee";
 import { ParallaxSection } from "@/components/ui/parallax-section";
+import { TestimonialCarousel } from "@/components/ui/testimonial-carousel";
 import { TextReveal } from "@/components/ui/text-reveal";
 
 const HeroAtmosphere = dynamic(() => import("@/components/ui/hero-atmosphere"), {
   ssr: false,
 });
+
+const MorphingBlob = dynamic(
+  () => import("@/components/ui/morphing-blob").then((m) => ({ default: m.MorphingBlob })),
+  { ssr: false },
+);
 
 const capabilities = [
   {
@@ -226,57 +233,46 @@ export default function Home() {
           </motion.div>
 
           <AnimatedSection direction="scale" delay={0.2}>
-            <div className="soil-panel relative overflow-hidden p-5 sm:p-6">
-              <div className="terrain-grid absolute inset-0 opacity-30" />
-              <div className="absolute inset-x-10 top-6 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
-              <div className="relative rounded-[1.9rem] bg-earth-950 px-6 py-8 text-cream sm:px-8">
-                <div className="absolute inset-0 bg-gradient-to-br from-forest/24 via-transparent to-terracotta/18" />
-                <div className="relative">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-[11px] uppercase tracking-[0.22em] text-cream/48">Studio operating model</p>
-                      <h2 className="mt-2 font-heading text-4xl leading-[0.96] tracking-[-0.035em]">One team. Three layers.</h2>
+            <div className="relative aspect-square w-full max-w-xl mx-auto">
+              <MorphingBlob className="absolute inset-0 h-full w-full" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <div className="soil-panel relative overflow-hidden px-6 py-7 sm:px-8">
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-5">
+                      <p className="text-[11px] uppercase tracking-[0.22em] text-earth-900/48">Studio operating model</p>
+                      <div className="rounded-full border border-earth-200/80 bg-white/60 p-2.5">
+                        <Blocks className="h-4 w-4 text-forest" />
+                      </div>
                     </div>
-                    <div className="rounded-full border border-white/12 bg-white/6 p-3">
-                      <Blocks className="h-5 w-5 text-cream" />
-                    </div>
-                  </div>
-
-                  <div className="mt-7 space-y-4">
-                    {serviceLanes.map((lane, index) => (
-                      <motion.div
-                        key={lane.name}
-                        initial={{ opacity: 0, y: 18 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 + index * 0.1 }}
-                        className="rounded-[1.6rem] border border-white/10 bg-white/6 p-5"
-                      >
-                        <div className="flex items-center justify-between">
-                          <p className="font-heading text-2xl">{lane.name}</p>
-                          <span className="text-[11px] uppercase tracking-[0.22em] text-cream/45">
-                            Layer {index + 1}
-                          </span>
-                        </div>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {lane.points.map((point) => (
-                            <span
-                              key={point}
-                              className="rounded-full border border-white/12 bg-white/6 px-3 py-2 text-xs text-cream/78"
-                            >
-                              {point}
+                    <h2 className="font-heading text-3xl leading-[0.96] tracking-[-0.035em] text-earth-950">One team. Three layers.</h2>
+                    <div className="mt-5 space-y-3">
+                      {serviceLanes.map((lane, index) => (
+                        <motion.div
+                          key={lane.name}
+                          initial={{ opacity: 0, y: 18 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 + index * 0.1 }}
+                          className="rounded-[1.2rem] border border-earth-200/70 bg-white/50 p-4"
+                        >
+                          <div className="flex items-center justify-between">
+                            <p className="font-heading text-xl text-earth-950">{lane.name}</p>
+                            <span className="text-[10px] uppercase tracking-[0.22em] text-earth-900/38">
+                              Layer {index + 1}
                             </span>
-                          ))}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 flex items-center justify-between rounded-[1.35rem] border border-white/10 bg-white/6 px-5 py-4">
-                    <div>
-                      <p className="text-[11px] uppercase tracking-[0.22em] text-cream/45">Current bias</p>
-                      <p className="mt-1 text-sm text-cream/75">Premium service brands, design-forward studios, founder-led products</p>
+                          </div>
+                          <div className="mt-2 flex flex-wrap gap-1.5">
+                            {lane.points.map((point) => (
+                              <span
+                                key={point}
+                                className="rounded-full border border-earth-200/80 bg-earth-50/80 px-2.5 py-1.5 text-[10px] text-earth-900/60"
+                              >
+                                {point}
+                              </span>
+                            ))}
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
-                    <Bot className="h-5 w-5 text-terracotta-light" />
                   </div>
                 </div>
               </div>
@@ -300,6 +296,22 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="py-6 overflow-hidden">
+        <Marquee
+          items={[
+            "Brand Strategy",
+            "Web Design",
+            "Next.js Development",
+            "SEO Systems",
+            "Content Strategy",
+            "Launch Campaigns",
+            "Conversion Design",
+            "Growth Architecture",
+          ]}
+          speed={35}
+        />
       </section>
 
       <section className="px-6 py-28 sm:px-8 lg:px-10">
@@ -440,6 +452,14 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="px-6 py-24 sm:px-8 lg:px-10">
+        <AnimatedSection direction="up">
+          <div className="soil-panel mx-auto max-w-5xl px-8 py-16 sm:px-12">
+            <TestimonialCarousel />
+          </div>
+        </AnimatedSection>
       </section>
 
       <section className="relative overflow-hidden bg-earth-100 px-6 py-32 sm:px-8 lg:px-10">
