@@ -1,23 +1,26 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, CheckCircle2, Clock3, Mail, MapPin } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { MagneticButton } from "@/components/ui/magnetic-button";
-import { TextReveal } from "@/components/ui/text-reveal";
 
 const serviceOptions = [
   "Positioning",
-  "Website Design",
-  "Next.js Build",
-  "SEO and Content",
-  "Launch Campaign",
-  "Retention System",
+  "Creative direction",
+  "Digital flagship",
+  "Launch and demand",
+  "The whole system",
   "Not sure yet",
 ];
 
-const timelineOptions = ["Immediate", "Within 30 days", "This quarter", "Just exploring"];
+const timelineOptions = [
+  "Now",
+  "Within 30 days",
+  "This quarter",
+  "Just exploring",
+];
 
 export default function ContactPage() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
@@ -33,236 +36,231 @@ export default function ContactPage() {
 
   const toggleService = (service: string) => {
     setSelectedServices((current) =>
-      current.includes(service) ? current.filter((item) => item !== service) : [...current, service],
+      current.includes(service)
+        ? current.filter((item) => item !== service)
+        : [...current, service],
     );
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    setSubmitted(true);
-  };
-
   return (
-    <>
-      <section className="relative overflow-hidden px-6 pt-40 pb-20 sm:px-8 lg:px-10">
-        <div className="topo-lines absolute inset-0 opacity-20" />
-        <motion.div
-          className="absolute right-[8%] top-16 h-72 w-72 rounded-full bg-terracotta/10 blur-3xl"
-          animate={{ scale: [1, 1.08, 1], rotate: [0, 12, 0] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <AnimatedSection direction="up" className="max-w-4xl">
-            <span className="section-label">Contact</span>
-            <div className="mt-7">
-              <TextReveal
-                text="Tell us what the brand needs to become clearer, sharper, or harder to ignore."
-                as="h1"
-                className="font-heading text-[clamp(3.75rem,8vw,6.7rem)] leading-[0.9] tracking-[-0.05em] text-earth-950"
-              />
-            </div>
-            <p className="mt-8 max-w-2xl text-xl leading-relaxed text-earth-900/68">
-              If you know the business has more substance than the current site or marketing makes visible, send the
-              brief. We will reply with an honest read on fit, scope, and next steps.
+    <section className="min-h-screen bg-earth-50 px-5 pb-20 pt-32 sm:px-8 lg:px-10 lg:pb-28 lg:pt-36">
+      <div className="mx-auto grid max-w-[92rem] overflow-hidden border border-earth-950/14 bg-white/42 lg:grid-cols-[0.72fr_1fr]">
+        <div className="relative min-h-[72svh] overflow-hidden lg:min-h-full">
+          <Image
+            src="/loam-field-study.png"
+            alt="A white tree, stone shelter, and path of pink flowers"
+            fill
+            preload
+            sizes="(min-width: 1024px) 42vw, 100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-earth-950/72 via-earth-950/4 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-10">
+            <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/58">
+              A useful beginning
             </p>
-          </AnimatedSection>
+            <h1 className="mt-5 max-w-[9ch] font-body text-[clamp(4rem,7vw,8rem)] font-extrabold uppercase leading-[0.72] tracking-[-0.075em]">
+              Tell us what needs
+              <span className="block font-editorial font-normal normal-case italic text-petal">
+                to take root.
+              </span>
+            </h1>
+            <p className="mt-7 max-w-md text-sm font-medium leading-relaxed text-white/72">
+              Give us the honest version: what is changing, what feels behind,
+              and what a stronger outcome would make possible.
+            </p>
+          </div>
         </div>
-      </section>
 
-      <section className="px-6 pb-28 sm:px-8 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr]">
-          <AnimatedSection direction="left" className="space-y-6">
-            <div className="soil-panel p-7">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-earth-900/40">What happens next</p>
-              <div className="mt-6 space-y-5">
-                {[
-                  {
-                    icon: Mail,
-                    title: "Reply within one business day",
-                    body: "If it looks like a fit, we will send back a short response with our read on the project.",
-                  },
-                  {
-                    icon: Clock3,
-                    title: "Discovery call",
-                    body: "A working session focused on the bottleneck, not a generic sales presentation.",
-                  },
-                  {
-                    icon: MapPin,
-                    title: "Scoped recommendation",
-                    body: "You get the clearest path we see, whether that is a full engagement or a tighter starting point.",
-                  },
-                ].map((item) => (
-                  <div key={item.title} className="flex items-start gap-4">
-                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-white/70 text-forest">
-                      <item.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h2 className="font-heading text-3xl leading-[0.96] tracking-[-0.03em] text-earth-950">{item.title}</h2>
-                      <p className="mt-2 text-sm leading-relaxed text-earth-900/66">{item.body}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="overflow-hidden rounded-[2rem] bg-earth-950 p-6 text-cream">
-              <div className="topo-lines absolute opacity-0" />
-              <p className="text-[11px] uppercase tracking-[0.22em] text-cream/42">Good fit signals</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                {[
-                  "Founder-led brand",
-                  "Premium service or product",
-                  "Website no longer matches the offer",
-                  "Needs brand and growth to align",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-white/10 bg-white/6 px-4 py-2 text-xs uppercase tracking-[0.18em] text-cream/74"
-                  >
-                    {item}
+        <div className="px-6 py-12 sm:px-10 lg:px-14 lg:py-16">
+          <AnimatePresence mode="wait">
+            {submitted ? (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, transform: "translateY(12px)" }}
+                animate={{ opacity: 1, transform: "translateY(0)" }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+                className="flex min-h-[44rem] flex-col justify-center"
+              >
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-petal text-earth-950">
+                  <Check className="h-6 w-6" />
+                </span>
+                <p className="mt-10 text-[9px] font-bold uppercase tracking-[0.3em] text-earth-900/42">
+                  Brief received
+                </p>
+                <h2 className="mt-5 max-w-[9ch] font-body text-[clamp(4rem,7vw,7rem)] font-extrabold uppercase leading-[0.74] tracking-[-0.07em] text-earth-950">
+                  The first seed is
+                  <span className="block font-editorial font-normal normal-case italic text-petal">
+                    in the ground.
                   </span>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection direction="right">
-            <AnimatePresence mode="wait">
-              {submitted ? (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="soil-panel flex min-h-[42rem] flex-col items-center justify-center px-8 py-16 text-center"
-                >
-                  <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-forest/10 text-forest">
-                    <CheckCircle2 className="h-10 w-10" />
-                  </div>
-                  <h2 className="mt-6 font-heading text-4xl text-earth-950">Brief received</h2>
-                  <p className="mt-4 max-w-md text-lg leading-relaxed text-earth-900/66">
-                    We have your note and will reply with next steps within one business day if the fit looks right.
+                </h2>
+                <p className="mt-7 max-w-lg text-base font-medium leading-relaxed text-earth-900/66">
+                  We will read the brief properly and reply with an honest view
+                  on fit, scope, and the most useful next move.
+                </p>
+              </motion.div>
+            ) : (
+              <motion.form
+                key="form"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  setSubmitted(true);
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <AnimatedSection direction="up">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-earth-900/42">
+                    Project inquiry · Usually replies within one day
                   </p>
-                </motion.div>
-              ) : (
-                <motion.form
-                  key="form"
-                  onSubmit={handleSubmit}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="soil-panel p-8 md:p-9"
-                >
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    {[
-                      { label: "Name", key: "name", type: "text", placeholder: "Amina Clarke", required: true },
-                      {
-                        label: "Email",
-                        key: "email",
-                        type: "email",
-                        placeholder: "amina@brand.com",
-                        required: true,
-                      },
-                      { label: "Company", key: "company", type: "text", placeholder: "Your brand", required: false },
-                      {
-                        label: "Budget range",
-                        key: "budget",
-                        type: "text",
-                        placeholder: "$15k - $40k",
-                        required: false,
-                      },
-                    ].map((field) => (
-                      <label key={field.key} className="block">
-                        <span className="mb-2 block text-sm font-medium text-earth-900/72">{field.label}</span>
-                        <input
-                          type={field.type}
-                          required={field.required}
-                          placeholder={field.placeholder}
-                          value={formData[field.key as keyof typeof formData]}
-                          onChange={(event) =>
-                            setFormData((current) => ({ ...current, [field.key]: event.target.value }))
-                          }
-                          className="w-full rounded-[1.25rem] border border-earth-200 bg-white/75 px-4 py-3 text-sm text-earth-950 outline-none transition-colors placeholder:text-earth-900/30 focus:border-forest"
-                        />
-                      </label>
-                    ))}
-                  </div>
+                  <h2 className="mt-5 max-w-[10ch] font-editorial text-[clamp(3rem,5vw,5.6rem)] italic leading-[0.84] tracking-[-0.045em] text-earth-950">
+                    Start wherever the pressure feels strongest.
+                  </h2>
+                </AnimatedSection>
 
-                  <div className="mt-6">
-                    <p className="mb-3 text-sm font-medium text-earth-900/72">What do you need?</p>
-                    <div className="flex flex-wrap gap-2">
-                      {serviceOptions.map((service) => {
-                        const active = selectedServices.includes(service);
-                        return (
-                          <button
-                            key={service}
-                            type="button"
-                            onClick={() => toggleService(service)}
-                            className={`rounded-full px-4 py-2 text-xs uppercase tracking-[0.16em] transition-colors ${
-                              active
-                                ? "border border-earth-950 bg-earth-950 text-cream"
-                                : "border border-earth-200 bg-white/65 text-earth-900/60 hover:border-forest hover:text-forest"
-                            }`}
-                          >
-                            {service}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
+                <div className="mt-12 grid gap-x-6 gap-y-8 sm:grid-cols-2">
+                  {[
+                    {
+                      label: "Your name",
+                      key: "name",
+                      type: "text",
+                      placeholder: "Amina Clarke",
+                      required: true,
+                    },
+                    {
+                      label: "Email",
+                      key: "email",
+                      type: "email",
+                      placeholder: "amina@brand.com",
+                      required: true,
+                    },
+                    {
+                      label: "Company",
+                      key: "company",
+                      type: "text",
+                      placeholder: "Your brand",
+                      required: false,
+                    },
+                    {
+                      label: "Working budget",
+                      key: "budget",
+                      type: "text",
+                      placeholder: "$20k–$60k",
+                      required: false,
+                    },
+                  ].map((field) => (
+                    <label key={field.key} className="block">
+                      <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-earth-900/48">
+                        {field.label}
+                      </span>
+                      <input
+                        type={field.type}
+                        required={field.required}
+                        placeholder={field.placeholder}
+                        value={formData[field.key as keyof typeof formData]}
+                        onChange={(event) =>
+                          setFormData((current) => ({
+                            ...current,
+                            [field.key]: event.target.value,
+                          }))
+                        }
+                        className="mt-3 w-full border-0 border-b border-earth-950/22 bg-transparent px-0 py-3 text-base font-medium text-earth-950 outline-none transition-colors duration-200 placeholder:text-earth-900/26 focus:border-petal"
+                      />
+                    </label>
+                  ))}
+                </div>
 
-                  <div className="mt-6">
-                    <p className="mb-3 text-sm font-medium text-earth-900/72">Timing</p>
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      {timelineOptions.map((option) => {
-                        const active = timeline === option;
-                        return (
-                          <button
-                            key={option}
-                            type="button"
-                            onClick={() => setTimeline(option)}
-                            className={`rounded-[1.25rem] border px-4 py-3 text-left text-sm transition-colors ${
-                              active
-                                ? "border-earth-950 bg-earth-950 text-cream"
-                                : "border-earth-200 bg-white/65 text-earth-900/64 hover:border-forest hover:text-forest"
-                            }`}
-                          >
-                            {option}
-                          </button>
-                        );
-                      })}
-                    </div>
+                <fieldset className="mt-10">
+                  <legend className="text-[9px] font-bold uppercase tracking-[0.24em] text-earth-900/48">
+                    Where is the pressure?
+                  </legend>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {serviceOptions.map((service) => {
+                      const active = selectedServices.includes(service);
+                      return (
+                        <button
+                          key={service}
+                          type="button"
+                          aria-pressed={active}
+                          onClick={() => toggleService(service)}
+                          className={`editorial-button border px-4 py-2.5 text-[9px] font-bold uppercase tracking-[0.18em] ${
+                            active
+                              ? "border-petal bg-petal text-earth-950"
+                              : "border-earth-950/16 text-earth-900/58 hover:border-earth-950/42"
+                          }`}
+                        >
+                          {service}
+                        </button>
+                      );
+                    })}
                   </div>
+                </fieldset>
 
-                  <label className="mt-6 block">
-                    <span className="mb-2 block text-sm font-medium text-earth-900/72">Project context</span>
-                    <textarea
-                      rows={6}
-                      required
-                      placeholder="What is changing in the business, what feels off about the current brand or site, and what would a strong outcome look like?"
-                      value={formData.message}
-                      onChange={(event) => setFormData((current) => ({ ...current, message: event.target.value }))}
-                      className="w-full resize-none rounded-[1.5rem] border border-earth-200 bg-white/75 px-4 py-4 text-sm text-earth-950 outline-none transition-colors placeholder:text-earth-900/30 focus:border-forest"
-                    />
-                  </label>
-
-                  <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <p className="max-w-md text-sm leading-relaxed text-earth-900/58">
-                      This form is for genuine project inquiries. If we are not the right fit, we will still try to be useful.
-                    </p>
-                    <MagneticButton
-                      type="submit"
-                      className="inline-flex items-center justify-center gap-2 rounded-full bg-earth-950 px-8 py-4 text-sm font-semibold text-cream transition-colors hover:bg-forest-deep"
-                    >
-                      Send the brief <ArrowRight className="h-4 w-4" />
-                    </MagneticButton>
+                <fieldset className="mt-9">
+                  <legend className="text-[9px] font-bold uppercase tracking-[0.24em] text-earth-900/48">
+                    When should it move?
+                  </legend>
+                  <div className="mt-4 grid grid-cols-2 gap-px bg-earth-950/14 sm:grid-cols-4">
+                    {timelineOptions.map((option) => {
+                      const active = timeline === option;
+                      return (
+                        <button
+                          key={option}
+                          type="button"
+                          aria-pressed={active}
+                          onClick={() => setTimeline(option)}
+                          className={`editorial-button min-h-14 px-3 py-3 text-[9px] font-bold uppercase tracking-[0.15em] ${
+                            active
+                              ? "bg-earth-950 text-white"
+                              : "bg-earth-50 text-earth-900/54 hover:bg-earth-100"
+                          }`}
+                        >
+                          {option}
+                        </button>
+                      );
+                    })}
                   </div>
-                </motion.form>
-              )}
-            </AnimatePresence>
-          </AnimatedSection>
+                </fieldset>
+
+                <label className="mt-9 block">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.24em] text-earth-900/48">
+                    The honest context
+                  </span>
+                  <textarea
+                    rows={5}
+                    required
+                    placeholder="What is changing in the business? What feels weaker than the offer deserves? What would become possible if the brand finally caught up?"
+                    value={formData.message}
+                    onChange={(event) =>
+                      setFormData((current) => ({
+                        ...current,
+                        message: event.target.value,
+                      }))
+                    }
+                    className="mt-3 w-full resize-none border border-earth-950/16 bg-earth-50/72 p-4 text-sm font-medium leading-relaxed text-earth-950 outline-none transition-colors duration-200 placeholder:text-earth-900/28 focus:border-petal"
+                  />
+                </label>
+
+                <div className="mt-8 flex flex-col gap-5 border-t border-earth-950/14 pt-7 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="max-w-sm text-xs font-medium leading-relaxed text-earth-900/46">
+                    No generic sales call. We read first, then tell you what we
+                    genuinely think.
+                  </p>
+                  <button
+                    type="submit"
+                    className="editorial-button inline-flex items-center justify-center gap-3 bg-earth-950 px-6 py-4 text-[10px] font-bold uppercase tracking-[0.22em] text-white"
+                  >
+                    Plant the brief
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </motion.form>
+            )}
+          </AnimatePresence>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

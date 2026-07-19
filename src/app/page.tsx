@@ -1,508 +1,515 @@
 "use client";
 
 import { useRef } from "react";
-import dynamic from "next/dynamic";
-import { motion, useScroll, useTransform } from "motion/react";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Blocks,
-  Bot,
-  ChartColumnIncreasing,
-  Compass,
-  Feather,
-  Globe,
-  Layers3,
-  Sprout,
-} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowDownRight, ArrowRight, ArrowUpRight } from "lucide-react";
+import { BloomFilm } from "@/components/bloom-film";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { Counter } from "@/components/ui/counter";
-import { CursorGlow } from "@/components/ui/cursor-glow";
-import { MagneticButton } from "@/components/ui/magnetic-button";
-import { Marquee } from "@/components/ui/marquee";
-import { ParallaxSection } from "@/components/ui/parallax-section";
-import { TestimonialCarousel } from "@/components/ui/testimonial-carousel";
-import { TextReveal } from "@/components/ui/text-reveal";
 
-const HeroAtmosphere = dynamic(() => import("@/components/ui/hero-atmosphere"), {
-  ssr: false,
-});
-
-const MorphingBlob = dynamic(
-  () => import("@/components/ui/morphing-blob").then((m) => ({ default: m.MorphingBlob })),
-  { ssr: false },
-);
-
-const capabilities = [
+const disciplines = [
   {
-    title: "Position the brand",
-    copy:
-      "Clarify the offer, sharpen the message, and make the brand feel expensive before anyone reads the proposal.",
-    icon: Compass,
-    accent: "text-forest",
-    surface: "from-forest/12 via-forest/6 to-transparent",
+    number: "01",
+    title: "Position the truth",
+    note: "Offer · narrative · verbal identity",
+    copy: "Find the sharpest thing that is already true about the business, then make every word carry it.",
   },
   {
-    title: "Design and build the site",
-    copy:
-      "Web experiences with stronger hierarchy, better motion, and more conviction than the average agency brochure.",
-    icon: Globe,
-    accent: "text-terracotta",
-    surface: "from-terracotta/12 via-terracotta/6 to-transparent",
+    number: "02",
+    title: "Build the flagship",
+    note: "Direction · design · Next.js",
+    copy: "Turn that truth into a digital experience with the presence, pace, and precision to change perception.",
   },
   {
-    title: "Launch the growth system",
-    copy:
-      "Editorial plans, search structure, retention flows, and reporting layers that keep working after launch week ends.",
-    icon: Sprout,
-    accent: "text-olive",
-    surface: "from-olive/16 via-olive/6 to-transparent",
+    number: "03",
+    title: "Create momentum",
+    note: "Launch · editorial · demand",
+    copy: "Give the brand a system for being discovered, remembered, and chosen long after launch day.",
   },
 ];
 
-const serviceLanes = [
-  {
-    name: "Brand and Positioning",
-    points: ["Offer architecture", "Messaging systems", "Narrative direction"],
-  },
-  {
-    name: "Web Design and Build",
-    points: ["Creative direction", "Next.js implementation", "Conversion-focused UX"],
-  },
-  {
-    name: "Marketing and Growth",
-    points: ["SEO and editorial", "Launch campaigns", "Retention loops"],
-  },
-];
-
-const stats = [
-  { value: 27, suffix: "+", label: "Brands repositioned" },
-  { value: 4.8, suffix: "x", label: "Average lift in qualified traffic" },
-  { value: 86, suffix: "%", label: "Projects extended after launch" },
-  { value: 18, suffix: "mo", label: "Typical compounding runway" },
-];
-
-const systems = [
-  {
-    title: "Messaging architecture",
-    body:
-      "We define the language that makes the rest of the site, deck, and campaign feel like one mind made it.",
-    icon: Feather,
-  },
-  {
-    title: "Digital flagship",
-    body:
-      "The website becomes your sharpest sales surface, not a disconnected design exercise or a generic template.",
-    icon: Layers3,
-  },
-  {
-    title: "Growth operating layer",
-    body:
-      "Search, content, launch rhythms, and reporting get connected into one system instead of separate retainers.",
-    icon: ChartColumnIncreasing,
-  },
-];
-
-const engagements = [
+const projects = [
   {
     name: "Nera",
-    category: "Luxury wellness",
-    summary: "Reframed a soft product story into a premium category narrative, then rebuilt the site around it.",
-    metrics: ["3.1x demo intent", "42% stronger time on site", "Launch narrative system"],
-    tone: "from-forest-deep via-forest to-forest-light",
+    category: "Wellness, re-authored",
+    image: "/loam-field-study.png",
+    position: "center",
   },
   {
     name: "Atelier North",
-    category: "Architecture studio",
-    summary: "Designed a portfolio experience and editorial layer that made the studio look as thoughtful as the work.",
-    metrics: ["2.4M pipeline influenced", "7 new inbound enterprise leads", "Editorial platform launch"],
-    tone: "from-earth-900 via-terracotta-dark to-terracotta",
+    category: "Architecture with a voice",
+    image: "/loam-portal.png",
+    position: "60% center",
   },
   {
     name: "Thorn",
-    category: "Productized consulting",
-    summary: "Turned a consultant-led business into a sharper studio offer with a site built for conversion and trust.",
-    metrics: ["58% lift in qualified inquiries", "Offer stack redesign", "Retention email system"],
-    tone: "from-olive via-forest to-forest-deep",
+    category: "Advisory, made inevitable",
+    image: "/loam-forms.png",
+    position: "center",
   },
 ];
 
 const process = [
   {
-    step: "01",
-    title: "Read the real business",
-    text:
-      "We start with what is actually true: the offer, the client, the sales motion, the weak spots, and the hidden leverage.",
+    number: "01",
+    title: "Read",
+    body: "We look past the brief and find the real commercial tension.",
   },
   {
-    step: "02",
-    title: "Shape the narrative",
-    text:
-      "Once the strategy is clear, we define the language, hierarchy, and visual attitude that make the brand feel unmistakable.",
+    number: "02",
+    title: "Distil",
+    body: "We turn complexity into one clear, ownable point of view.",
   },
   {
-    step: "03",
-    title: "Build the flagship",
-    text:
-      "Design, copy, motion, structure, and implementation come together in one site that feels deliberate at every level.",
+    number: "03",
+    title: "Make",
+    body: "Strategy, words, design, and code take shape in the same room.",
   },
   {
-    step: "04",
-    title: "Turn it into a system",
-    text:
-      "Then we extend the same thinking into SEO, launch content, retention flows, and reporting so the work compounds.",
+    number: "04",
+    title: "Compound",
+    body: "The launch becomes a beginning, with systems built to keep growing.",
   },
 ];
 
 export default function Home() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.1]);
+  const prototypePinkRef = useRef<HTMLDivElement>(null);
+  const prototypeHintRef = useRef<HTMLDivElement>(null);
 
   return (
     <>
-      <CursorGlow />
+      <section
+        id="prototype-hero"
+        data-prototype="hero"
+        className="prototype-reveal relative z-[60] min-h-svh overflow-hidden bg-white"
+        onPointerMove={(event) => {
+          if (event.pointerType !== "mouse") return;
 
-      <section ref={heroRef} className="relative overflow-hidden px-6 pt-40 pb-32 sm:px-8 lg:px-10">
-        <div className="topo-lines absolute inset-0 opacity-25" />
-        <HeroAtmosphere />
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-earth-300 to-transparent" />
-        <motion.div
-          className="absolute -top-8 right-[8%] h-[30rem] w-[30rem] rounded-full bg-terracotta/14 blur-3xl"
-          animate={{ scale: [1, 1.08, 1], rotate: [0, 8, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          const bounds = event.currentTarget.getBoundingClientRect();
+          const x = event.clientX - bounds.left;
+          const y = event.clientY - bounds.top;
+
+          if (prototypePinkRef.current) {
+            prototypePinkRef.current.style.setProperty("--reveal-x", `${x}px`);
+            prototypePinkRef.current.style.setProperty("--reveal-y", `${y}px`);
+          }
+
+          if (
+            prototypeHintRef.current &&
+            prototypeHintRef.current.style.opacity !== "0"
+          ) {
+            prototypeHintRef.current.style.opacity = "0";
+          }
+        }}
+        onPointerLeave={() => {
+          prototypePinkRef.current?.style.removeProperty("--reveal-x");
+          prototypePinkRef.current?.style.removeProperty("--reveal-y");
+          prototypeHintRef.current?.style.removeProperty("opacity");
+        }}
+      >
+        <Image
+          src="/loam-landscape-cream-v2.png"
+          alt="A sunlit mountain valley with a small stone cottage"
+          fill
+          preload
+          sizes="100vw"
+          className="object-cover"
         />
-        <motion.div
-          className="absolute bottom-0 left-[2%] h-[28rem] w-[28rem] rounded-full bg-forest/14 blur-3xl"
-          animate={{ scale: [1, 1.12, 1], rotate: [0, -10, 0] }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <div className="pointer-events-none absolute inset-x-[8%] top-28 h-px bg-gradient-to-r from-transparent via-earth-300/70 to-transparent" />
 
-        <div className="relative z-10 mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-          <motion.div style={{ y: heroY, opacity: heroOpacity }}>
-            <AnimatedSection direction="up">
-              <span className="section-label">Loam is a strategy-led growth studio</span>
-            </AnimatedSection>
-
-            <div className="mt-8 max-w-5xl">
-              <TextReveal
-                text="Marketing, websites, and brand systems built to feel inevitable."
-                as="h1"
-                className="font-heading text-[clamp(3.95rem,8vw,7.35rem)] leading-[0.88] tracking-[-0.05em] text-earth-950"
-              />
-            </div>
-
-            <AnimatedSection direction="up" delay={0.25} className="editorial-rule mt-9 max-w-2xl">
-              <p className="text-xl leading-relaxed text-earth-900/72 sm:text-[1.35rem]">
-                Loam combines positioning, web creation, and organic growth into one studio engagement. We help
-                ambitious brands look sharper, sound clearer, and convert with more force.
-              </p>
-            </AnimatedSection>
-
-            <AnimatedSection direction="up" delay={0.35} className="mt-12 flex flex-col gap-4 sm:flex-row">
-              <MagneticButton
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-earth-950 px-8 py-4.5 text-sm font-semibold uppercase tracking-[0.14em] text-cream shadow-[0_18px_38px_rgba(26,51,37,0.2)] transition-colors hover:bg-forest-deep"
-              >
-                Start your project <ArrowRight className="h-4 w-4" />
-              </MagneticButton>
-              <MagneticButton
-                href="/work"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-earth-300 bg-white/60 px-8 py-4.5 text-sm font-semibold uppercase tracking-[0.14em] text-earth-900 transition-colors hover:border-forest hover:text-forest"
-              >
-                See selected work <ArrowUpRight className="h-4 w-4" />
-              </MagneticButton>
-            </AnimatedSection>
-
-            <AnimatedSection direction="up" delay={0.45} className="mt-12 flex flex-wrap gap-3">
-              {["Positioning", "Website Design", "Next.js Build", "SEO Systems", "Launch Campaigns"].map((item) => (
-                <span
-                  key={item}
-                  className="rounded-full border border-earth-200/90 bg-white/55 px-4 py-2.5 text-[11px] uppercase tracking-[0.22em] text-earth-900/52"
-                >
-                  {item}
-                </span>
-              ))}
-            </AnimatedSection>
-          </motion.div>
-
-          <AnimatedSection direction="scale" delay={0.2}>
-            <div className="relative aspect-square w-full max-w-xl mx-auto">
-              <MorphingBlob className="absolute inset-0 h-full w-full" />
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <div className="soil-panel relative overflow-hidden px-6 py-7 sm:px-8">
-                  <div className="relative">
-                    <div className="flex items-center justify-between mb-5">
-                      <p className="text-[11px] uppercase tracking-[0.22em] text-earth-900/48">Studio operating model</p>
-                      <div className="rounded-full border border-earth-200/80 bg-white/60 p-2.5">
-                        <Blocks className="h-4 w-4 text-forest" />
-                      </div>
-                    </div>
-                    <h2 className="font-heading text-3xl leading-[0.96] tracking-[-0.035em] text-earth-950">One team. Three layers.</h2>
-                    <div className="mt-5 space-y-3">
-                      {serviceLanes.map((lane, index) => (
-                        <motion.div
-                          key={lane.name}
-                          initial={{ opacity: 0, y: 18 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.4 + index * 0.1 }}
-                          className="rounded-[1.2rem] border border-earth-200/70 bg-white/50 p-4"
-                        >
-                          <div className="flex items-center justify-between">
-                            <p className="font-heading text-xl text-earth-950">{lane.name}</p>
-                            <span className="text-[10px] uppercase tracking-[0.22em] text-earth-900/38">
-                              Layer {index + 1}
-                            </span>
-                          </div>
-                          <div className="mt-2 flex flex-wrap gap-1.5">
-                            {lane.points.map((point) => (
-                              <span
-                                key={point}
-                                className="rounded-full border border-earth-200/80 bg-earth-50/80 px-2.5 py-1.5 text-[10px] text-earth-900/60"
-                              >
-                                {point}
-                              </span>
-                            ))}
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
+        <div
+          ref={prototypeHintRef}
+          aria-hidden="true"
+          className="prototype-hover-hint pointer-events-none absolute inset-0"
+        >
+          <Image
+            src="/loam-landscape-pink-v2.png"
+            alt=""
+            fill
+            loading="eager"
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
-      </section>
 
-      <section className="px-6 py-10 sm:px-8 lg:px-10">
-        <div className="soil-panel mx-auto max-w-7xl px-7 py-8">
-          <div className="grid gap-6 md:grid-cols-4">
-            {stats.map((stat, index) => (
-              <AnimatedSection key={stat.label} direction="up" delay={index * 0.08}>
-                <div className="flex flex-col gap-2 border-l border-earth-200/80 pl-5 first:border-l-0 first:pl-0">
-                  <div className="font-heading text-5xl leading-none tracking-[-0.04em] text-earth-950">
-                    <Counter value={stat.value} suffix={stat.suffix} duration={2.2} />
-                  </div>
-                  <p className="text-xs uppercase tracking-[0.22em] text-earth-900/48">{stat.label}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
+        <div
+          ref={prototypePinkRef}
+          className="pointer-events-none absolute inset-0"
+          style={{
+            maskImage:
+              "radial-gradient(circle 165px at var(--reveal-x, -1000px) var(--reveal-y, -1000px), black 0%, black 88%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(circle 165px at var(--reveal-x, -1000px) var(--reveal-y, -1000px), black 0%, black 88%, transparent 100%)",
+          }}
+        >
+          <Image
+            src="/loam-landscape-pink-v2.png"
+            alt=""
+            fill
+            loading="eager"
+            sizes="100vw"
+            className="object-cover"
+          />
+          <p className="pointer-events-none absolute bottom-[8%] right-[9%] z-10 max-w-[15rem] -rotate-[5deg] text-right font-editorial text-[clamp(1.6rem,2.6vw,3.2rem)] italic leading-[0.88] tracking-[-0.035em] text-white drop-shadow-[0_3px_12px_rgba(83,42,43,0.5)]">
+            Some things bloom when noticed.
+          </p>
         </div>
-      </section>
 
-      <section className="py-6 overflow-hidden">
-        <Marquee
-          items={[
-            "Brand Strategy",
-            "Web Design",
-            "Next.js Development",
-            "SEO Systems",
-            "Content Strategy",
-            "Launch Campaigns",
-            "Conversion Design",
-            "Growth Architecture",
-          ]}
-          speed={35}
-        />
-      </section>
-
-      <section className="px-6 py-28 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <AnimatedSection direction="up" className="max-w-3xl">
-            <span className="section-label">What Loam actually does</span>
-            <h2 className="mt-6 max-w-4xl font-heading text-5xl leading-[0.92] tracking-[-0.04em] text-earth-950 sm:text-6xl">
-              The point is not more deliverables. The point is a brand that lands harder.
-            </h2>
-            <p className="mt-6 max-w-2xl text-xl leading-relaxed text-earth-900/68">
-              We design the strategic layer, the website layer, and the growth layer together so the business stops
-              leaking coherence across channels.
-            </p>
-          </AnimatedSection>
-
-          <div className="mt-14 grid gap-7 lg:grid-cols-3">
-            {capabilities.map((item, index) => (
-              <AnimatedSection key={item.title} direction="up" delay={index * 0.1}>
-                <div className="soil-panel group relative h-full overflow-hidden p-8">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${item.surface} opacity-90`} />
-                  <div className="absolute inset-x-8 top-6 h-px bg-gradient-to-r from-transparent via-earth-300/80 to-transparent" />
-                  <div className="relative flex h-full flex-col">
-                    <div className={`mb-10 inline-flex h-14 w-14 items-center justify-center rounded-[1.35rem] bg-white/72 ${item.accent}`}>
-                      <item.icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="font-heading text-4xl leading-[0.96] tracking-[-0.035em] text-earth-950">{item.title}</h3>
-                    <p className="mt-5 flex-1 text-lg leading-relaxed text-earth-900/68">{item.copy}</p>
-                    <LinkLine />
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-forest-deep px-6 py-32 sm:px-8 lg:px-10">
-        <ParallaxSection speed={0.16} className="absolute inset-0">
-          <div className="topo-lines absolute inset-0 opacity-10" />
-        </ParallaxSection>
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/12 to-transparent" />
-
-        <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
-          <AnimatedSection direction="left">
-            <span className="section-label border-white/10 bg-white/6 text-cream/65 before:bg-terracotta before:shadow-[0_0_0_4px_rgba(198,123,92,0.16)]">
-              How the system works
+        <div className="pointer-events-none absolute left-[5%] top-[7%] z-10 w-[min(54rem,90vw)] text-left text-white">
+          <div
+            aria-label="Make it take root."
+            className="drop-shadow-[0_4px_18px_rgba(23,61,43,0.34)]"
+          >
+            <span className="block font-body text-[clamp(3.7rem,9.6vw,10.5rem)] font-extrabold uppercase leading-[0.7] tracking-[-0.08em]">
+              Make it
             </span>
-            <h2 className="mt-6 max-w-md font-heading text-5xl leading-[0.92] tracking-[-0.04em] text-cream sm:text-6xl">
-              The site is the flagship. Everything else extends from it.
-            </h2>
-            <p className="mt-6 max-w-md text-xl leading-relaxed text-cream/64">
-              Loam is built for founders and teams who are tired of hiring one shop for branding, another for the
-              website, and a third for growth.
-            </p>
+            <span className="mt-2 block font-editorial text-[clamp(4.2rem,10.4vw,11.25rem)] italic leading-[0.7] tracking-[-0.065em]">
+              take root.
+            </span>
+          </div>
+          <p className="mt-7 max-w-md font-body text-sm font-semibold leading-relaxed text-white/88 drop-shadow-[0_2px_10px_rgba(23,61,43,0.5)] sm:text-base">
+            Positioning, digital flagships, and growth systems for ambitious
+            brands ready to become impossible to overlook.
+          </p>
+        </div>
+
+        <p className="pointer-events-none absolute left-[58%] top-[57%] z-10 hidden max-w-[23rem] -rotate-[7deg] font-editorial text-[clamp(2.2rem,3.4vw,4.7rem)] italic leading-[0.82] tracking-[-0.045em] text-white/92 drop-shadow-[0_3px_12px_rgba(23,61,43,0.48)] sm:block">
+          The best ideas grow where nobody is looking.
+        </p>
+
+        <div className="pointer-events-none absolute left-[19%] top-[62%] z-10 hidden max-w-[15rem] -rotate-[4deg] text-white/92 drop-shadow-[0_2px_9px_rgba(23,61,43,0.5)] md:block">
+          <div className="flex items-center gap-2 font-body text-[9px] font-semibold uppercase tracking-[0.28em]">
+            <span>Field note</span>
+            <span className="h-px w-8 bg-current opacity-45" />
+            <span>01</span>
+          </div>
+          <p className="mt-2 font-editorial text-[1.45rem] italic leading-[0.92] tracking-[-0.025em]">
+            A small place for ideas to become inevitable.
+          </p>
+        </div>
+
+        <a
+          href="#original-hero"
+          className="prototype-enter-link absolute bottom-0 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 px-5 pt-3 text-white drop-shadow-[0_2px_9px_rgba(23,61,43,0.5)] focus-visible:rounded-t-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+        >
+          <span className="prototype-enter-label whitespace-nowrap font-body text-[10px] font-bold uppercase tracking-[0.34em] sm:text-[11px]">
+            Enter the studio <span aria-hidden="true">↓</span>
+          </span>
+          <span
+            aria-hidden="true"
+            className="prototype-enter-line h-11 w-px bg-current opacity-70"
+          />
+        </a>
+      </section>
+
+      <section
+        id="original-hero"
+        className="overflow-hidden px-5 py-24 sm:px-8 lg:px-10 lg:py-36"
+      >
+        <div className="mx-auto grid max-w-[92rem] gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(25rem,0.54fr)] lg:items-center">
+          <AnimatedSection direction="up">
+            <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.32em] text-earth-900/45">
+              <span className="h-px w-10 bg-petal" />
+              Loam, beneath the surface
+            </div>
+            <h1 className="mt-8 max-w-[12ch] font-body text-[clamp(4.2rem,8.2vw,9.4rem)] font-extrabold uppercase leading-[0.72] tracking-[-0.075em] text-earth-950">
+              Good brands get attention.
+              <span className="mt-4 block font-editorial font-normal normal-case italic text-petal">
+                Great ones create gravity.
+              </span>
+            </h1>
+            <div className="mt-10 grid max-w-3xl gap-7 border-t border-earth-950/16 pt-7 sm:grid-cols-[auto_1fr]">
+              <ArrowDownRight className="h-7 w-7 text-petal" />
+              <p className="max-w-xl text-lg font-medium leading-relaxed text-earth-900/68">
+                Loam finds the strongest thing your business can stand for, then
+                builds the words, digital experience, and growth system that
+                make people feel it.
+              </p>
+            </div>
+            <div className="mt-10 flex flex-wrap gap-8">
+              <Link
+                href="/work"
+                className="editorial-link inline-flex items-center gap-3 border-b border-earth-950 pb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-earth-950"
+              >
+                See what took root
+                <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/about"
+                className="editorial-link inline-flex items-center gap-3 border-b border-earth-950/28 pb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-earth-900/56"
+              >
+                Read the field notes
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </AnimatedSection>
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {systems.map((system, index) => (
-              <AnimatedSection key={system.title} direction="up" delay={index * 0.1}>
-                <div className="ink-panel h-full p-6">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/6 text-cream">
-                    <system.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="mt-6 font-heading text-2xl text-cream">{system.title}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-cream/62">{system.body}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
+          <AnimatedSection direction="up" delay={0.12}>
+            <figure className="editorial-image-frame relative aspect-[4/5] overflow-hidden">
+              <Image
+                src="/loam-field-study.png"
+                alt="A white stone shelter and tree in a pale mountain field"
+                fill
+                sizes="(min-width: 1024px) 38vw, 100vw"
+                className="object-cover"
+              />
+              <figcaption className="absolute bottom-6 left-6 max-w-[12rem] font-editorial text-2xl italic leading-none text-white drop-shadow-md">
+                Build the conditions. Growth follows.
+              </figcaption>
+            </figure>
+          </AnimatedSection>
         </div>
       </section>
 
-      <section className="px-6 py-24 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <AnimatedSection direction="up" className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <span className="section-label">Selected engagements</span>
-              <h2 className="mt-6 font-heading text-4xl text-earth-950 sm:text-5xl">
-                Work that changes how the brand is perceived, not just how it looks.
+      <section className="border-y border-earth-950/14 bg-white/42 px-5 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-[92rem]">
+          <div className="grid gap-5 border-b border-earth-950/14 py-10 lg:grid-cols-[0.7fr_1fr] lg:items-end">
+            <AnimatedSection direction="up">
+              <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-earth-900/45">
+                Three ways in
+              </p>
+              <h2 className="mt-4 max-w-[10ch] font-body text-5xl font-extrabold uppercase leading-[0.78] tracking-[-0.065em] text-earth-950 sm:text-7xl">
+                One point of view.
+              </h2>
+            </AnimatedSection>
+            <p className="max-w-lg text-base font-medium leading-relaxed text-earth-900/62 lg:justify-self-end">
+              Not a menu of disconnected services. A joined-up practice for
+              making the business clearer, more desirable, and easier to grow.
+            </p>
+          </div>
+
+          {disciplines.map((item, index) => (
+            <AnimatedSection
+              key={item.number}
+              direction="up"
+              delay={index * 0.05}
+            >
+              <Link
+                href="/services"
+                className="service-row group grid gap-5 border-b border-earth-950/14 py-9 text-earth-950 md:grid-cols-[5rem_1fr_0.75fr_1fr] md:items-center"
+              >
+                <span className="font-editorial text-2xl italic text-petal group-hover:text-white/62">
+                  {item.number}
+                </span>
+                <h3 className="font-body text-4xl font-extrabold uppercase leading-none tracking-[-0.055em] sm:text-5xl">
+                  {item.title}
+                </h3>
+                <p className="text-[9px] font-bold uppercase tracking-[0.22em] opacity-48">
+                  {item.note}
+                </p>
+                <p className="max-w-md text-sm font-medium leading-relaxed opacity-68">
+                  {item.copy}
+                </p>
+              </Link>
+            </AnimatedSection>
+          ))}
+        </div>
+      </section>
+
+      <section className="relative min-h-[82svh] overflow-hidden">
+        <Image
+          src="/loam-forms.png"
+          alt="Three carved stone forms standing in a pale mountain field"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-earth-950/76 via-earth-950/4 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 px-5 pb-10 sm:px-8 lg:px-10 lg:pb-16">
+          <AnimatedSection
+            direction="up"
+            className="mx-auto flex max-w-[92rem] flex-col gap-8 text-white lg:flex-row lg:items-end lg:justify-between"
+          >
+            <h2 className="max-w-[12ch] font-body text-[clamp(4rem,8vw,9rem)] font-extrabold uppercase leading-[0.72] tracking-[-0.075em]">
+              Strategy you can
+              <span className="block font-editorial font-normal normal-case italic text-petal">
+                feel in the room.
+              </span>
+            </h2>
+            <p className="max-w-md border-l border-white/42 pl-5 text-sm font-medium leading-relaxed text-white/76">
+              The work should not look strategic. It should make every choice
+              feel more inevitable—from the first sentence to the final
+              interaction.
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section className="px-5 py-24 sm:px-8 lg:px-10 lg:py-36">
+        <div className="mx-auto max-w-[92rem]">
+          <AnimatedSection
+            direction="up"
+            className="flex flex-col gap-6 border-b border-earth-950/16 pb-9 lg:flex-row lg:items-end lg:justify-between"
+          >
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-earth-900/45">
+                Selected growth
+              </p>
+              <h2 className="mt-5 font-body text-6xl font-extrabold uppercase leading-[0.78] tracking-[-0.07em] text-earth-950 sm:text-8xl">
+                Work that
+                <span className="ml-3 font-editorial font-normal normal-case italic text-petal">
+                  landed.
+                </span>
               </h2>
             </div>
-            <MagneticButton
+            <Link
               href="/work"
-              className="inline-flex items-center gap-2 rounded-full border border-earth-300 bg-white/55 px-6 py-3 text-sm font-semibold text-earth-900 transition-colors hover:border-forest hover:text-forest"
+              className="editorial-link inline-flex items-center gap-3 border-b border-earth-950 pb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-earth-950"
             >
-              Open the case studies <ArrowUpRight className="h-4 w-4" />
-            </MagneticButton>
+              Open the case files
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </AnimatedSection>
 
-          <div className="mt-14 grid gap-7 lg:grid-cols-3">
-            {engagements.map((item, index) => (
-              <AnimatedSection key={item.name} direction="up" delay={index * 0.1}>
-                <div className="overflow-hidden rounded-[2.1rem] border border-earth-200/80 bg-white shadow-[0_30px_70px_rgba(74,53,32,0.1)]">
-                  <div className={`bg-gradient-to-br ${item.tone} p-9 text-cream`}>
-                    <p className="text-[11px] uppercase tracking-[0.22em] text-cream/48">{item.category}</p>
-                    <h3 className="mt-3 font-heading text-4xl leading-[0.96] tracking-[-0.035em]">{item.name}</h3>
-                    <p className="mt-5 text-lg leading-relaxed text-cream/72">{item.summary}</p>
+          <div className="mt-10 grid gap-8 lg:grid-cols-12">
+            {projects.map((project, index) => (
+              <AnimatedSection
+                key={project.name}
+                direction="up"
+                delay={index * 0.08}
+                className={
+                  index === 0
+                    ? "lg:col-span-5"
+                    : index === 1
+                      ? "lg:col-span-7"
+                      : "lg:col-span-12"
+                }
+              >
+                <Link href="/work" className="project-card group block">
+                  <div
+                    className={`relative overflow-hidden ${
+                      index === 2 ? "aspect-[16/7]" : "aspect-[4/5]"
+                    }`}
+                  >
+                    <Image
+                      src={project.image}
+                      alt=""
+                      fill
+                      sizes={
+                        index === 2
+                          ? "100vw"
+                          : "(min-width: 1024px) 50vw, 100vw"
+                      }
+                      className="project-image object-cover"
+                      style={{ objectPosition: project.position }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-earth-950/42 via-transparent to-transparent" />
+                    <span className="absolute right-5 top-5 flex h-11 w-11 items-center justify-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur-sm">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
                   </div>
-                  <div className="space-y-3 p-9">
-                    {item.metrics.map((metric) => (
-                      <div
-                        key={metric}
-                        className="rounded-full border border-earth-200/80 bg-earth-50 px-4 py-3 text-sm text-earth-900/66"
-                      >
-                        {metric}
-                      </div>
-                    ))}
+                  <div className="flex items-baseline justify-between gap-5 border-b border-earth-950/16 py-5">
+                    <h3 className="font-body text-3xl font-extrabold uppercase tracking-[-0.055em] text-earth-950">
+                      {project.name}
+                    </h3>
+                    <p className="text-right font-editorial text-lg italic text-earth-900/52">
+                      {project.category}
+                    </p>
                   </div>
-                </div>
+                </Link>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-28 sm:px-8 lg:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.75fr_1.25fr]">
-          <AnimatedSection direction="left">
-            <span className="section-label">Process</span>
-            <h2 className="mt-6 max-w-md font-heading text-5xl leading-[0.92] tracking-[-0.04em] text-earth-950 sm:text-6xl">
-              Deliberate enough to make the work feel expensive.
-            </h2>
-            <p className="mt-6 max-w-md text-xl leading-relaxed text-earth-900/66">
-              We are not trying to make the fastest website in the room. We are trying to make the clearest and most
-              convincing one.
+      <section className="bg-earth-950 px-5 py-24 text-white sm:px-8 lg:px-10 lg:py-36">
+        <div className="mx-auto max-w-[92rem]">
+          <AnimatedSection direction="up" className="max-w-6xl">
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-white/38">
+              Our working belief
             </p>
+            <h2 className="mt-7 font-body text-[clamp(4rem,8.2vw,9.2rem)] font-extrabold uppercase leading-[0.72] tracking-[-0.075em]">
+              We do not decorate businesses.
+              <span className="mt-4 block font-editorial font-normal normal-case italic text-petal">
+                We reveal their force.
+              </span>
+            </h2>
           </AnimatedSection>
 
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="mt-20 grid border-t border-white/16 md:grid-cols-2 xl:grid-cols-4">
             {process.map((item, index) => (
-              <AnimatedSection key={item.step} direction="up" delay={index * 0.08}>
-                <div className="soil-panel h-full p-7">
-                  <p className="text-[11px] uppercase tracking-[0.22em] text-earth-900/42">{item.step}</p>
-                  <h3 className="mt-5 font-heading text-3xl leading-[0.96] tracking-[-0.03em] text-earth-950">{item.title}</h3>
-                  <p className="mt-5 text-base leading-relaxed text-earth-900/66">{item.text}</p>
-                </div>
+              <AnimatedSection
+                key={item.number}
+                direction="up"
+                delay={index * 0.06}
+                className="border-b border-white/16 px-0 py-7 md:border-r md:px-6 md:first:pl-0 xl:border-b-0"
+              >
+                <span className="font-editorial text-xl italic text-petal">
+                  {item.number}
+                </span>
+                <h3 className="mt-9 font-body text-4xl font-extrabold uppercase tracking-[-0.055em]">
+                  {item.title}
+                </h3>
+                <p className="mt-4 max-w-xs text-sm font-medium leading-relaxed text-white/54">
+                  {item.body}
+                </p>
               </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="px-6 py-24 sm:px-8 lg:px-10">
-        <AnimatedSection direction="up">
-          <div className="soil-panel mx-auto max-w-5xl px-8 py-16 sm:px-12">
-            <TestimonialCarousel />
+      <section className="relative min-h-[92svh] overflow-hidden bg-[#315c8e]">
+        <BloomFilm />
+        <div className="absolute inset-0 bg-gradient-to-t from-earth-950/68 via-earth-950/4 to-earth-950/12" />
+        <div className="absolute inset-x-0 top-0 flex items-center justify-between px-5 py-6 text-[9px] font-bold uppercase tracking-[0.28em] text-white/72 sm:px-8 lg:px-10">
+          <span>Bloom study · 01</span>
+          <span className="hidden sm:block">The point of the groundwork</span>
+        </div>
+        <AnimatedSection
+          direction="up"
+          className="absolute inset-x-5 bottom-9 text-white sm:inset-x-8 lg:inset-x-10 lg:bottom-12"
+        >
+          <div className="mx-auto flex max-w-[92rem] flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <h2 className="max-w-[10ch] font-body text-[clamp(5rem,11vw,12rem)] font-extrabold uppercase leading-[0.66] tracking-[-0.08em] drop-shadow-[0_5px_25px_rgba(18,28,32,0.28)]">
+              Then it
+              <span className="mt-3 block font-editorial font-normal normal-case italic">
+                blooms.
+              </span>
+            </h2>
+            <p className="max-w-sm border-l border-white/58 pl-5 text-sm font-semibold leading-relaxed text-white/82 drop-shadow-md">
+              Not louder for the sake of it. Alive, distinct, and finally
+              carrying the force that was underneath all along.
+            </p>
           </div>
         </AnimatedSection>
       </section>
 
-      <section className="relative overflow-hidden bg-earth-100 px-6 py-32 sm:px-8 lg:px-10">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-forest/8 via-transparent to-terracotta/10" />
-        <div className="relative mx-auto max-w-5xl text-center">
+      <section className="grid min-h-[82svh] lg:grid-cols-2">
+        <div className="relative min-h-[55svh] overflow-hidden lg:min-h-full">
+          <Image
+            src="/loam-portal.png"
+            alt="A carved stone portal in a field of pale pink flowers"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="flex items-center bg-earth-100 px-6 py-20 sm:px-12 lg:px-16">
           <AnimatedSection direction="up">
-            <span className="section-label">Ready when you are</span>
-            <div className="mt-6 flex justify-center">
-              <TextReveal
-                text="If the business is strong but the brand experience is lagging, we should talk."
-                as="h2"
-                className="max-w-5xl justify-center font-heading text-5xl leading-[0.9] tracking-[-0.05em] text-earth-950 sm:text-[4.9rem]"
-              />
-            </div>
-            <p className="mx-auto mt-7 max-w-2xl text-xl leading-relaxed text-earth-900/66">
-              Loam is best for teams that want one coherent studio to shape the strategy, website, and growth layer in
-              the same motion.
+            <p className="text-[10px] font-bold uppercase tracking-[0.32em] text-earth-900/42">
+              The next threshold
             </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <MagneticButton
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-earth-950 px-8 py-4.5 text-sm font-semibold uppercase tracking-[0.14em] text-cream transition-colors hover:bg-forest-deep"
-              >
-                Book the discovery call <ArrowRight className="h-4 w-4" />
-              </MagneticButton>
-              <MagneticButton
-                href="/services"
-                className="inline-flex items-center gap-2 rounded-full border border-earth-300 bg-white/60 px-8 py-4.5 text-sm font-semibold uppercase tracking-[0.14em] text-earth-900 transition-colors hover:border-forest hover:text-forest"
-              >
-                Review capabilities <ArrowUpRight className="h-4 w-4" />
-              </MagneticButton>
-            </div>
+            <h2 className="mt-7 max-w-[10ch] font-body text-[clamp(4rem,7vw,8.5rem)] font-extrabold uppercase leading-[0.72] tracking-[-0.075em] text-earth-950">
+              Ready to become
+              <span className="mt-3 block font-editorial font-normal normal-case italic text-petal">
+                impossible to overlook?
+              </span>
+            </h2>
+            <p className="mt-8 max-w-lg text-base font-medium leading-relaxed text-earth-900/66">
+              Bring the business with substance. We will help the brand catch up
+              to it.
+            </p>
+            <Link
+              href="/contact"
+              className="editorial-button mt-9 inline-flex items-center gap-3 bg-earth-950 px-6 py-4 text-[10px] font-bold uppercase tracking-[0.22em] text-white"
+            >
+              Begin the project
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </AnimatedSection>
         </div>
       </section>
     </>
-  );
-}
-
-function LinkLine() {
-  return (
-    <div className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-forest">
-      Explore this layer <ArrowRight className="h-4 w-4" />
-    </div>
   );
 }

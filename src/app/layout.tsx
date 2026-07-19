@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { Manrope, Playfair_Display } from "next/font/google";
+import { Instrument_Serif, Manrope, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
-import { WebGLBackground } from "@/components/ui/webgl-background";
-import { ParticleField } from "@/components/ui/particle-field";
 
 const playfair = Playfair_Display({
   variable: "--font-heading",
@@ -20,13 +18,24 @@ const manrope = Manrope({
   display: "swap",
 });
 
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  ),
   title: {
-    default: "Loam | Marketing, Websites, and Growth Systems",
+    default: "Loam — Make it take root",
     template: "%s | Loam Studio",
   },
   description:
-    "Loam is a strategy-led studio for brands that need sharper positioning, better websites, and growth systems that actually compound.",
+    "Positioning, digital flagships, and growth systems for ambitious brands ready to become impossible to overlook.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -34,15 +43,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Loam Studio",
-    title: "Loam | Marketing, Websites, and Growth Systems",
+    title: "Loam — Make it take root",
     description:
-      "Strategy-led studio combining positioning, web creation, and organic growth into one coherent engagement.",
+      "Positioning, digital flagships, and growth systems for ambitious brands ready to become impossible to overlook.",
+    images: ["/loam-landscape-pink-v2.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Loam | Marketing, Websites, and Growth Systems",
+    title: "Loam — Make it take root",
     description:
-      "Strategy-led studio combining positioning, web creation, and organic growth into one coherent engagement.",
+      "Positioning, digital flagships, and growth systems for ambitious brands ready to become impossible to overlook.",
+    images: ["/loam-landscape-pink-v2.png"],
   },
 };
 
@@ -54,16 +65,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${manrope.variable} scroll-smooth antialiased`}
+      className={`${playfair.variable} ${manrope.variable} ${instrumentSerif.variable} scroll-smooth antialiased`}
     >
-      <body className="min-h-screen flex flex-col bg-earth-50 text-earth-900 font-body">
-        <WebGLBackground />
-        <ParticleField />
+      <body className="flex min-h-screen flex-col overflow-x-hidden bg-earth-50 font-body text-earth-900">
         <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <main className="relative flex-1">{children}</main>
+        <div className="relative z-10">
+          <Footer />
+        </div>
         <ScrollToTop />
-        <div className="grain-overlay" aria-hidden="true" />
       </body>
     </html>
   );
